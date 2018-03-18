@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     uid: DataTypes.STRING
   }, {});
   User.associate = (models) => {
-    // associations can be defined here
+    User.hasMany(models.UserJob);
+    User.belongsToMany(models.Job, { through: 'UserJob' });
   };
   return User;
 };

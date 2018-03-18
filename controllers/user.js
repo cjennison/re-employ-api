@@ -1,17 +1,19 @@
 const { User } = require('../db/models');
 const request = require('request');
-const { authenticationRequired } = require('../services/auth');
 const oktaConfig = require('../config/okta.json');
 
 const UserCreator = require('../services/user/user-creator');
+const BaseController = require('./base');
 
-class UsersController {
+class UsersController extends BaseController {
   constructor(app) {
-    app.get('/users', authenticationRequired, (...args) => {
+    super(app);
+
+    app.get('/users', this.authenticationRequired(), (...args) => {
       this.getSubscribers(...args);
     });
 
-    app.get('/users/:uid', authenticationRequired, (...args) => {
+    app.get('/users/:uid', this.authenticationRequired(), (...args) => {
       this.getUser(...args);
     });
 
@@ -29,12 +31,18 @@ class UsersController {
 
   getUser(req, res) {
     console.log('GET /users/:uid');
+
     User.find({
       where: {
         uid: req.params.uid
-      }
+      },
+      include: this.modelFields(req.query.fields)
     }).then((user) => {
-      res.json(user);
+      if (this.userMatchesClaimId(req, user.uid)) {
+        res.json(user);
+      } else {
+        res.sendStatus(403);
+      }
     });
   }
 

@@ -19,9 +19,6 @@ function authenticationRequired(req, res, next) {
 
   return oktaJwtVerifier.verifyAccessToken(accessToken)
     .then((jwt) => {
-      console.log(jwt)
-
-      //Determines who this user is. Check the user with what they claim to be
       req.jwt = jwt;
       next();
     })
@@ -30,4 +27,4 @@ function authenticationRequired(req, res, next) {
     });
 }
 
-module.exports.authenticationRequired = authenticationRequired
+module.exports.authenticationRequired = authenticationRequired;
