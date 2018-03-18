@@ -13,7 +13,7 @@ class UserCreator {
   }
 
   encryptPassword(password) {
-    return crypto.createHash('sha256').update(password, 'utf8').digest();
+    return crypto.createHash('sha256').update(password).digest('base64');
   }
 }
 

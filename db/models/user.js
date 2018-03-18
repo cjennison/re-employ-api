@@ -9,6 +9,9 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = (models) => {
     User.hasMany(models.UserJob);
     User.belongsToMany(models.Job, { through: 'UserJob' });
+
+    User.hasMany(models.UserRole);
+    User.belongsToMany(models.Role, { through: 'UserRole' });
   };
   return User;
 };

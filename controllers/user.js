@@ -1,4 +1,4 @@
-const { User } = require('../db/models');
+const { User, Role, UserRole } = require('../db/models');
 const request = require('request');
 const oktaConfig = require('../config/okta.json');
 
@@ -9,16 +9,28 @@ class UsersController extends BaseController {
   constructor(app) {
     super(app);
 
+    app.delete('/users/:userId/roles/:id', this.authenticationRequired(), (...args) => {
+      this.removeRoleFromUser(...args);
+    });
+
+    app.get('/users/search', this.authenticationRequired(), (...args) => {
+      this.findUser(...args);
+    });
+
     app.get('/users', this.authenticationRequired(), (...args) => {
       this.getSubscribers(...args);
     });
 
-    app.get('/users/:uid', this.authenticationRequired(), (...args) => {
-      this.getUser(...args);
-    });
-
     app.post('/users', (...args) => {
       this.postUsers(...args);
+    });
+
+    app.post('/users/:id/roles/:roleName', this.authenticationRequired(), (...args) => {
+      this.addRoleToUser(...args);
+    });
+
+    app.get('/users/:uid', this.authenticationRequired(), (...args) => {
+      this.getUser(...args);
     });
   }
 
@@ -43,6 +55,65 @@ class UsersController extends BaseController {
       } else {
         res.sendStatus(403);
       }
+    });
+  }
+
+  findUser(req, res) {
+    console.log('GET /users/search');
+
+    this.userHasRole(req.jwt, 'admin').then(() => {
+      User.find({
+        where: {
+          email: req.query.email
+        },
+        include: this.modelFields(req.query.fields)
+      }).then((user) => {
+        res.json(user);
+      });
+    }).catch((err) => {
+      console.log(err);
+      res.sendStatus(403);
+    });
+  }
+
+  addRoleToUser(req, res) {
+    console.log('POST /users/:id/roles/:rollName');
+
+    this.userHasRole(req.jwt, 'admin').then(() => {
+      User.findById(req.params.id).then((user) => {
+        Role.findOne({ where: { name: req.params.roleName } }).then((role) => {
+          role.addUser(user).then(() => {
+            res.send(user);
+          }).catch((err) => {
+            console.log(err);
+            res.sendStatus(400);
+          });
+        });
+      });
+    }).catch((err) => {
+      console.log(err);
+      res.sendStatus(403);
+    });
+  }
+
+  removeRoleFromUser(req, res) {
+    console.log('DELETE /users/:userId/roles/:id');
+
+    this.userHasRole(req.jwt, 'admin').then(() => {
+      UserRole.destroy({
+        where: {
+          roleId: req.params.id,
+          userId: req.params.userId
+        }
+      }).then(() => {
+        res.sendStatus(200);
+      }).catch((err) => {
+        console.log(err);
+        res.sendStatus(400);
+      });
+    }).catch((err) => {
+      console.log(err);
+      res.sendStatus(403);
     });
   }
 

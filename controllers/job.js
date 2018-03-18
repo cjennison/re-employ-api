@@ -13,6 +13,14 @@ class JobsController extends BaseController {
       this.getJob(...args);
     });
 
+    app.delete('/jobs/:id', (...args) => {
+      this.destroyJob(...args);
+    });
+
+    app.post('/jobs', this.authenticationRequired(), (...args) => {
+      this.createJob(...args);
+    });
+
     app.post('/users/:userId/jobs/:id', this.authenticationRequired(), (...args) => {
       this.addJobToUser(...args);
     });
@@ -29,6 +37,16 @@ class JobsController extends BaseController {
     });
   }
 
+  createJob(req, res) {
+    console.log('POST /jobs');
+    Job.create({
+      name: req.body.name,
+      description: req.body.description
+    }).then((job) => {
+      res.json(job);
+    });
+  }
+
   getJob(req, res) {
     console.log('GET /jobs/:id');
     Job.find({
@@ -37,6 +55,28 @@ class JobsController extends BaseController {
       }
     }).then((job) => {
       res.json(job);
+    });
+  }
+
+  destroyJob(req, res) {
+    console.log('DELETE /jobs/:id');
+
+    UserJob.findAll({
+      where: {
+        jobId: req.params.id
+      }
+    }).then((userJobs) => {
+      if (userJobs.length) {
+        res.send(400, { error: 'Cannot delete job with user associations' });
+      } else {
+        Job.destroy({
+          where: {
+            id: req.params.id
+          }
+        }).then((job) => {
+          res.json(job);
+        });
+      }
     });
   }
 
