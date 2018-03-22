@@ -12,3 +12,7 @@ database credentials.
 
 # Redis
 Run `redis-server` in another tab.
+
+# Jobs APIs
+### Github Jobs (Tech Jobs) https://jobs.github.com/api
+### USA Jobs (Government Jobs) https://search.gov/developer/jobs.html

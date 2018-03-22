@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const controllers = require('./controllers/index');
 const queue = require('./jobs/queue');
-const jobs = require('./jobs/index')
+const jobs = require('./jobs/index');
 const kue = require('kue');
 
 const app = express();
