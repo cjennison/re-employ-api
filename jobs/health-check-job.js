@@ -5,7 +5,7 @@ class HealthCheckJob {
   }
 
   process() {
-    console.log('Job is alive!');
+    console.log('Health Check is Positive');
     this.done();
   }
 }

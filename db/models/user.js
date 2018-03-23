@@ -12,6 +12,9 @@ module.exports = (sequelize, DataTypes) => {
 
     User.hasMany(models.UserRole);
     User.belongsToMany(models.Role, { through: 'UserRole' });
+
+    User.hasMany(models.UserLocation);
+    User.belongsToMany(models.Location, { through: 'UserLocation' });
   };
   return User;
 };

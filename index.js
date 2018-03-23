@@ -19,9 +19,10 @@ db.sequelize
   .authenticate()
   .then(() => {
     console.log('Connection has been established successfully.');
-    app.listen(3000, () => console.log(`Started on port 3000!`));
+    app.listen(3000, () => console.log('Started on port 3000!'));
     queue.listen(() => {
       new jobs.creators.HealthCheckJobCreator(queue.getQueue()).createJob();
+      new jobs.creators.OpenPositionSearchJobCreator(queue.getQueue()).createJob();
     });
   })
   .catch((err) => {

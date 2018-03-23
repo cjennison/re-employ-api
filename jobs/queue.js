@@ -42,6 +42,8 @@ class JobQueue {
     console.log('Queue Listening to jobs');
 
     this.queue.process('health-check', 1, (job, done) => new jobs.processors.HealthCheckJob(job, done).process());
+    this.queue.process('search-job-positions', 1, (job, done) => new jobs.processors.OpenPositionSearchJob(job, done).process());
+
     cb();
   }
 }

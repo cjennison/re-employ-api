@@ -1,11 +1,11 @@
-class HealthCheckJobCreator {
+class OpenPositionSearchJobCreator {
   constructor(queue) {
     this.queue = queue;
   }
 
   createJob() {
-    this.queue.create('health-check', { apps: ['index'] })
-      .priority('critical')
+    this.queue.create('search-job-positions', { jobId: 1 })
+      .priority('low')
       .attempts(8)
       .backoff(true)
       .removeOnComplete(true)
@@ -17,4 +17,4 @@ class HealthCheckJobCreator {
   }
 }
 
-module.exports = HealthCheckJobCreator;
+module.exports = OpenPositionSearchJobCreator;
