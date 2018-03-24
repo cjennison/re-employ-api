@@ -18,7 +18,7 @@ class OpenPositionSearchJob {
     }).then((job) => {
       const searcher = new JobSearcher(job);
       searcher.execute().then((errors) => {
-        if (errors.length) {
+        if (errors && errors.length) {
           return this.done(errors);
         }
         return this.done();

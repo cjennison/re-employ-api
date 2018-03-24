@@ -4,7 +4,7 @@ class OpenPositionSearchJobCreator {
   }
 
   createJob() {
-    this.queue.create('search-job-positions', { jobId: 1 })
+    this.queue.create('search-job-positions', { jobId: 5 })
       .priority('low')
       .attempts(8)
       .backoff(true)

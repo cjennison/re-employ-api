@@ -1,4 +1,6 @@
 const _ = require('lodash');
+const APIs = require('./apis/index');
+const JobOpeningBulkCreator = require('./job-opening-bulk-creator');
 
 class JobSearcher {
   constructor(job) {
@@ -15,18 +17,20 @@ class JobSearcher {
   }
 
   async execute() {
+    console.log('Finding Job Openings for', this.job.name);
     await this.query();
     await this.save();
-    return this.errors;
+    console.log('Completed');
   }
 
   async query() {
-    this.foundOpenJobs = [{ something: 'yeah' }];
+    this.jobOpenings = await APIs.queryAPIs(this.job, this.locations);
+    this.jobOpenings = _.flatten(this.jobOpenings);
   }
 
   async save() {
-    console.log('Saved');
-    return true;
+    const bulkCreator = new JobOpeningBulkCreator(this.jobOpenings, this.job, this.locations);
+    return bulkCreator.execute();
   }
 }
 

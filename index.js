@@ -21,6 +21,7 @@ db.sequelize
     console.log('Connection has been established successfully.');
     app.listen(3000, () => console.log('Started on port 3000!'));
     queue.listen(() => {
+      //DEBUG TEST JOBS
       new jobs.creators.HealthCheckJobCreator(queue.getQueue()).createJob();
       new jobs.creators.OpenPositionSearchJobCreator(queue.getQueue()).createJob();
     });

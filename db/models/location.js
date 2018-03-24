@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     zip: DataTypes.STRING
   }, {});
   Location.associate = (models) => {
+    Location.hasMany(models.JobOpening);
     Location.hasMany(models.UserLocation);
     Location.belongsToMany(models.User, { through: 'UserLocation' });
   };
