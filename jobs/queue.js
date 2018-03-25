@@ -40,12 +40,13 @@ class JobQueue {
 
   listen(cb) {
     console.log('Queue Listening to jobs');
-    
+
     this.queue.process('health-check', 1, (job, done) => new jobs.processors.HealthCheckJob(job, done).process());
     this.queue.process('search-job-positions', 1, (job, done) => new jobs.processors.OpenPositionSearchJob(job, done).process());
+    this.queue.process('search-job-positions-dispatcher', 1, (job, done) => new jobs.processors.OpenPositionSearchJobDispatcherJob(job, done, this.queue).process());
     this.queue.process('user-job-opening-daily-dipatcher', 1, (job, done) => new jobs.processors.UserJobOpeningDailyDispatcherJob(job, done, this.queue).process());
     this.queue.process('user-job-opening-daily-emailer', 1, (job, done) => new jobs.processors.UserJobOpeningDailyEmailerJob(job, done).process());
-    
+
     cb();
   }
 }

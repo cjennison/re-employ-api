@@ -18,5 +18,9 @@ Run `redis-server` in another tab.
 ### USA Jobs (Government Jobs) https://search.gov/developer/jobs.html
 
 # Developer Help
-*I'm bad at CRON what do I do?*
+**I'm bad at CRON what do I do?**
 https://crontab.guru/
+
+**How do I debug jobs?**
+Temporarily, uncomment the `DEBUG TEST JOB` under index.js.
+Alternatively set the CRON config to be a shorter time interval.

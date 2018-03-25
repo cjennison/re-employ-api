@@ -24,6 +24,7 @@ db.sequelize
     app.listen(3000, () => console.log('Started on port 3000!'));
     queue.listen(() => {
       Scheduler.scheduleDefault();
+      
       //DEBUG TEST JOBS
       //new jobs.creators.HealthCheckJobCreator(queue.getQueue()).createJob();
       //new jobs.creators.OpenPositionSearchJobCreator(queue.getQueue()).createJob();
