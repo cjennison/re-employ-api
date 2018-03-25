@@ -1,0 +1,18 @@
+<div>
+  <h3>Hello, {{ user.firstName }}</h3>
+  <p>
+    We found new jobs for you! Check them out:
+    <ul>
+    {% for jobOpening in jobOpenings %}
+      <li>
+        {{ jobOpening.name }}
+        {{ jobOpening.company }} {{ jobOpening.department }}
+        in {{ jobOpening.Location.city }}, {{ jobOpening.Location.state }}
+
+        <!-- TODO: Think link should go through a shortUrl system -->
+        <a href="{{jobOpening.applicationUrl}}">Apply Now!</a>
+      </li>
+    {% endfor %}
+    </ul>
+  </p>
+</div>

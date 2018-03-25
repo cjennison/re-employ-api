@@ -1,4 +1,4 @@
-const { JobOpening } = require('../../db/models');
+const { JobOpening, Location } = require('../../db/models');
 
 const SUGGESTED_JOB_LIMIT = 3;
 
@@ -17,6 +17,7 @@ class SuggestedUserJobOpeningService {
 
     //TODO  Check for opt outs
     return JobOpening.findAll({
+      include: [Location],
       where: {
         jobId: this.jobs.map(job => job.id),
       },

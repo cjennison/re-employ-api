@@ -30,10 +30,27 @@ class JobOpeningBulkCreator {
     });
   }
 
+  uniqueOpenings(openings) {
+    //  remove collisions in the same data set
+    const uniqueOpenings = [];
+    _.forEach(openings, (opening) => {
+      const hash = JobOpening.generateHash(opening);
+      const newOpening = opening;
+      newOpening.hash = hash;
+
+      const matchingOpening = _.find(uniqueOpenings, op => op.hash === hash);
+      if (!matchingOpening) {
+        uniqueOpenings.push(newOpening);
+      }
+    });
+
+    return uniqueOpenings;
+  }
+
   async execute() {
     console.log('Creating', this.openings.length, 'jobs');
     const promises = [];
-    _.forEach(this.openings, (opening) => {
+    _.forEach(this.uniqueOpenings(this.openings), (opening) => {
       const createPromise = new Promise((resolve, reject) => {
         const hash = JobOpening.generateHash(opening);
         this.searchFor(hash).then((jobOpening) => {

@@ -1,3 +1,5 @@
+const SuggestedJobOpeningsEmailGenerator = require('./suggested-job-openings-email-generator');
+
 class SuggestedJobsEmailService {
   constructor(user, jobOpenings) {
     this.user = user;
@@ -6,7 +8,8 @@ class SuggestedJobsEmailService {
 
   async execute() {
     console.log(`Sending ${this.jobOpenings.length} jobs to ${this.user.email}`);
-    return true;
+    const emailer = new SuggestedJobOpeningsEmailGenerator(this.user, this.jobOpenings);
+    return emailer.execute();
   }
 }
 
