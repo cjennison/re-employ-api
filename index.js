@@ -7,6 +7,8 @@ const queue = require('./jobs/queue');
 const jobs = require('./jobs/index');
 const kue = require('kue');
 
+const Scheduler = require('./jobs/scheduler');
+
 const app = express();
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
@@ -21,10 +23,11 @@ db.sequelize
     console.log('Connection has been established successfully.');
     app.listen(3000, () => console.log('Started on port 3000!'));
     queue.listen(() => {
+      Scheduler.scheduleDefault();
       //DEBUG TEST JOBS
       //new jobs.creators.HealthCheckJobCreator(queue.getQueue()).createJob();
       //new jobs.creators.OpenPositionSearchJobCreator(queue.getQueue()).createJob();
-      new jobs.creators.UserJobOpeningDailyDispatcherJobCreator(queue.getQueue()).createJob();
+      //new jobs.creators.UserJobOpeningDailyDispatcherJobCreator(queue.getQueue()).createJob();
     });
   })
   .catch((err) => {

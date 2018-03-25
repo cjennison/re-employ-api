@@ -35,6 +35,7 @@ class UserJobOpeningDailyDispatcherJob {
   }
 
   process() {
+    console.log(`Started user-job-opening-daily-dipatcher at ${new Date()}`)
     this.dispatch(0);
   }
 }

@@ -16,3 +16,7 @@ Run `redis-server` in another tab.
 # Jobs APIs
 ### Github Jobs (Tech Jobs) https://jobs.github.com/api
 ### USA Jobs (Government Jobs) https://search.gov/developer/jobs.html
+
+# Developer Help
+*I'm bad at CRON what do I do?*
+https://crontab.guru/

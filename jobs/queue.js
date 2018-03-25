@@ -1,4 +1,4 @@
-const kue = require('kue');
+const kue = require('kue-scheduler');
 const jobs = require('./index');
 
 let redisConfig;

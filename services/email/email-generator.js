@@ -44,7 +44,7 @@ class EmailGenerator {
   }
 
   sendMail(transporter, options) {
-    console.log('Sending Mail w/ Options', options);
+    console.log('Sending Mail w/ Options');
     transporter.sendMail(options, (error, info) => {
       if (error) {
         return console.log(error);
