@@ -1,4 +1,4 @@
-const { Job } = require('../db/models');
+const { Job } = require('../../db/models');
 const _ = require('lodash');
 
 const BATCH_SIZE = 5;
@@ -38,7 +38,7 @@ class OpenPositionSearchJobDispatcherJob {
   }
 
   process() {
-    console.log(`Started open-position-search-job-dipatcher at ${new Date()}`)
+    console.log(`Started open-position-search-job-dipatcher at ${new Date()}`);
     this.dispatch(0);
   }
 }

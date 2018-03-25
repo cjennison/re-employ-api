@@ -1,5 +1,5 @@
-const { Job, User, Location } = require('../db/models');
-const { JobSearcher } = require('../services/job');
+const { Job, User, Location } = require('../../db/models');
+const { JobSearcher } = require('../../services/job');
 
 class OpenPositionSearchJob {
   constructor(job, done) {
