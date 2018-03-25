@@ -3,7 +3,7 @@
     "job": "user-job-opening-daily-dipatcher",
     "priority": "critical",
     "attempts": 8,
-    "schedule": "*/5 * * * *",
+    "schedule": "0 0 5 * * *",
     "removeOnComplete": true,
     "backoff": true
   }
