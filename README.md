@@ -5,10 +5,12 @@
 3. Create a database for the application (ie. `re-employ_db`)
 4. Run `npm install`
 5. Run `cp config/database-default.json config/database.json` and fill out 
-6. Run `cp .env-default .env` and fill out gmail application credentials
+6. Run `cp config/api-default.json config/api.json` and fill out. See APIs for key requests.
+7. Run `cp config/okta-default.json config/okta.json` and fill out. See Auth.
+8. Run `cp .env-default .env` and fill out gmail application credentials
 database credentials.
-7. Run `node_modules/.bin/sequelize db:migrate`
-8. Run `npm start` to start the web server.
+9. Run `node_modules/.bin/sequelize db:migrate`
+10. Run `npm start` to start the web server.
 
 # Redis
 Run `redis-server` in another tab.
@@ -16,6 +18,10 @@ Run `redis-server` in another tab.
 # Jobs APIs
 ### Github Jobs (Tech Jobs) https://jobs.github.com/api
 ### USA Jobs (Government Jobs) https://search.gov/developer/jobs.html
+Get a key at https://developer.usajobs.gov/APIRequest/Index
+# Auth
+For Auth we are using OKTA. Sign up at https://www.okta.com/.
+In the developer dashboard select API and create a new token. Use this token in the `okta.json`.
 
 # Developer Help
 **I'm bad at CRON what do I do?**  
