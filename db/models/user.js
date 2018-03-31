@@ -15,6 +15,8 @@ module.exports = (sequelize, DataTypes) => {
 
     User.hasMany(models.UserLocation);
     User.belongsToMany(models.Location, { through: 'UserLocation' });
+
+    User.hasMany(models.JobOpeningOptOut);
   };
   return User;
 };

@@ -21,9 +21,7 @@ class SuggestedJobOpeningsEmailGenerator extends EmailGenerator {
     return new Promise((resolve, reject) => {
       engine
         .parse(templateHTML)
-        .then((template) => {
-          return template.render({ user: this.user, jobOpenings: this.jobOpenings });
-        })
+        .then(template => template.render({ user: this.user, jobOpenings: this.jobOpenings }))
         .then(result => resolve(result))
         .catch(error => reject(error));
     });

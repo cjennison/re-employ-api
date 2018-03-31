@@ -68,7 +68,7 @@ class EmailGenerator {
         console.log('Error sending email', err);
       });
     }).catch((err) => {
-      console.log('Error sending email', err);
+      console.log('Error readying transporter', err);
     });
   }
 

@@ -1,4 +1,8 @@
-const { JobOpening, Location } = require('../../db/models');
+const {
+  JobOpening,
+  Location,
+  JobOpeningOptOut
+} = require('../../db/models');
 
 const SUGGESTED_JOB_LIMIT = 3;
 
@@ -15,12 +19,25 @@ class SuggestedUserJobOpeningService {
   async findJobs() {
     console.log('Finding Job Openings for User', this.user.id);
 
-    //TODO  Check for opt outs
     return JobOpening.findAll({
-      include: [Location],
       where: {
         jobId: this.jobs.map(job => job.id),
+        '$JobOpeningOptOuts.id$': null
       },
+      include: [
+        {
+          model: Location,
+          required: true
+        },
+        {
+          model: JobOpeningOptOut,
+          duplicating: false,
+          where: {
+            userId: this.user.id
+          },
+          required: false
+        }
+      ],
       order: [
         ['postedDate', 'DESC']
       ],
