@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     JobOpening.belongsTo(models.Job);
     JobOpening.belongsTo(models.Location);
     JobOpening.hasMany(models.JobOpeningOptOut);
+    JobOpening.hasMany(models.JobOpeningShortUrl);
   };
 
   JobOpening.generateHash = (opening) => {
