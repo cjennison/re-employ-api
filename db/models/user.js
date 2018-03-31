@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
 
     User.hasMany(models.JobOpeningOptOut);
     User.hasMany(models.JobOpeningShortUrl);
+    User.hasMany(models.JobApplicationRecord);
   };
   return User;
 };

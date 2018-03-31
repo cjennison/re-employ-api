@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   JobOpeningShortUrl.associate = (models) => {
     JobOpeningShortUrl.belongsTo(models.User);
     JobOpeningShortUrl.belongsTo(models.JobOpening);
+    JobOpeningShortUrl.hasMany(models.JobApplicationRecord);
   };
 
   JobOpeningShortUrl.generateHash = (userId, jobOpeningId, locationId) => {

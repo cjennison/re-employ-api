@@ -1,6 +1,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('JobOpeningShortUrls', {
+    return queryInterface.createTable('JobApplicationRecords', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -21,8 +21,15 @@ module.exports = {
           key: 'id'
         }
       },
-      hash: {
-        type: Sequelize.STRING
+      jobOpeningShortUrlId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'jobOpeningShortUrls',
+          key: 'id'
+        }
+      },
+      didApply: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +42,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('JobOpeningShortUrls');
+    return queryInterface.dropTable('JobApplicationRecords');
   }
 };
