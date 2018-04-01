@@ -90,6 +90,7 @@ class ActivityController extends BaseController {
   }
 
   createActivityExportForUser(req, res) {
+    console.log('POST /users/:userId/activities/export');
     Activity.findAll({
       where: {
         userId: req.params.userId

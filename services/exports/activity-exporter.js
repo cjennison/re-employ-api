@@ -35,6 +35,10 @@ class ActivityExporter {
       try {
         const parser = new Json2csvParser({ fields });
         const csv = parser.parse(data);
+        
+        //  ----------
+        //  TODO Write to file
+        //  ----------
         resolve(csv);
       } catch (error) {
         reject(error);
