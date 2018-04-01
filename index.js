@@ -17,11 +17,12 @@ app.use('/queue', kue.app);
 app.use(cors());
 controllers(app);
 
+const server = app.listen(3000, () => console.log('Started on port 3000!'));
+
 db.sequelize
   .authenticate()
   .then(() => {
-    console.log('Connection has been established successfully.');
-    app.listen(3000, () => console.log('Started on port 3000!'));
+    console.log('DB Connection has been established successfully.');
     queue.listen(() => {
       Scheduler.scheduleDefault();
       
@@ -34,3 +35,5 @@ db.sequelize
   .catch((err) => {
     console.error('Unable to connect to the database:', err);
   });
+
+module.exports = server;
