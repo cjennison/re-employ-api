@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
 const emailTransporter = require('./email-transporter');
+const EmailRecordCreator = require('./email-record-creator');
 
 require('dotenv').load();
 
@@ -72,18 +73,16 @@ class EmailGenerator {
     });
   }
 
-  createRecord() {
-    /*
+  createRecord(options) {
     const creator = new EmailRecordCreator({
       emailType: this.emailType,
       toAddress: options.to,
       fromAddress: this.fromAddress,
       subject: options.subject,
       html: options.html,
-    }, this.subscriber);
+    }, this.user);
 
     creator.create();
-    */
   }
 }
 
