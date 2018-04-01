@@ -1,5 +1,6 @@
 const { Activity } = require('../db/models');
 const BaseController = require('./base');
+const ActivityExporter = require('../services/exports/activity-exporter');
 
 class ActivityController extends BaseController {
   constructor(app) {
@@ -22,6 +23,10 @@ class ActivityController extends BaseController {
 
     app.post('/users/:userId/activities', this.authenticationRequired(), (...args) => {
       this.createActivityForUser(...args);
+    });
+
+    app.post('/users/:userId/activities/export', this.authenticationRequired(), (...args) => {
+      this.createActivityExportForUser(...args);
     });
   }
 
@@ -80,6 +85,26 @@ class ActivityController extends BaseController {
         }).then((result) => {
           res.json(result);
         });
+      }
+    });
+  }
+
+  createActivityExportForUser(req, res) {
+    Activity.findAll({
+      where: {
+        userId: req.params.userId
+      }
+    }).then((activities) => {
+      if (activities.length) {
+        const exporter = new ActivityExporter(req.params.userId, activities);
+        exporter.execute().then((result) => {
+          res.send(202, result);
+        }).catch((error) => {
+          console.log(error);
+          res.send(400, error);
+        });
+      } else {
+        res.send(400, 'No activites to export.');
       }
     });
   }
