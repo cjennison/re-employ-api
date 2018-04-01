@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     JobApplicationRecord.belongsTo(models.User);
     JobApplicationRecord.belongsTo(models.JobOpening);
     JobApplicationRecord.belongsTo(models.JobOpeningShortUrl);
+    JobApplicationRecord.hasMany(models.Activity);
   };
   return JobApplicationRecord;
 };

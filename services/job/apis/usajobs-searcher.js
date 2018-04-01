@@ -99,10 +99,14 @@ class USAJobsSearcher {
           console.log('Could not load USAJobs', error);
           return reject(error);
         }
-        const data = JSON.parse(body);
-        let records = this.createJobRecords(data.SearchResult.SearchResultItems);
-        records = this.duplicateRecordsPerLocation(records);
-        resolve(records);
+        try {
+          const data = JSON.parse(body);
+          let records = this.createJobRecords(data.SearchResult.SearchResultItems);
+          records = this.duplicateRecordsPerLocation(records);
+          resolve(records);
+        } catch (err) {
+          resolve(null);
+        }
       });
     });
   }

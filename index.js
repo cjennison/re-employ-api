@@ -27,7 +27,7 @@ db.sequelize
       
       //DEBUG TEST JOBS
       //new jobs.creators.HealthCheckJobCreator(queue.getQueue()).createJob();
-      //new jobs.creators.OpenPositionSearchJobCreator(queue.getQueue()).createJob();
+      //new jobs.processors.OpenPositionSearchJobDispatcherJob({}, ()=>{}, queue.getQueue()).process();
       //new jobs.creators.UserJobOpeningDailyDispatcherJobCreator(queue.getQueue()).createJob();
     });
   })
