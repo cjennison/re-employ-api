@@ -1,6 +1,7 @@
+require('dotenv').load();
+
 const { User, Role, UserRole } = require('../db/models');
 const request = require('request');
-const oktaConfig = require('../config/okta.json');
 
 const UserCreator = require('../services/user/user-creator');
 const BaseController = require('./base');
@@ -124,7 +125,7 @@ class UsersController extends BaseController {
         method: 'POST',
         url: 'https://dev-535949.oktapreview.com/api/v1/users?activate=true',
         headers: {
-          Authorization: `SSWS ${oktaConfig.token}`
+          Authorization: `SSWS ${process.env.OKTA_TOKEN}`
         },
         body: {
           profile: {
