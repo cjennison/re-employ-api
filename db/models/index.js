@@ -6,21 +6,12 @@ const path = require('path');
 const Sequelize = require('sequelize');
 
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
 const db = {};
 
 const DATABASE_URL = process.env.DATABASE_URL || process.env.HEROKU_POSTGRESQL_RED_URL;
 
-let sequelize;
-
 console.log('Connecting to', DATABASE_URL);
-
-if (DATABASE_URL) {
-  sequelize = new Sequelize(DATABASE_URL, {});
-} else {
-  const config = require(__dirname + '/../../config/database.json')[env];
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+const sequelize = new Sequelize(DATABASE_URL, {});
 
 fs
   .readdirSync(__dirname)
