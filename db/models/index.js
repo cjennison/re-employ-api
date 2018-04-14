@@ -1,16 +1,24 @@
+
+const dotenv = require('dotenv');
+
+dotenv.load();
+
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../../config/database.json')[env];
 const db = {};
 
+const DATABASE_URL = process.env.DATABASE_URL;
+
 let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+
+if (DATABASE_URL) {
+  sequelize = new Sequelize(DATABASE_URL, {});
 } else {
+  const config = require(__dirname + '/../../config/database.json')[env];
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
