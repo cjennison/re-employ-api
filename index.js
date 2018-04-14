@@ -13,6 +13,7 @@ const app = express();
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use('/queue', kue.app);
+app.use('/status', (req, res) => res.send(200));
 
 app.use(cors());
 controllers(app);

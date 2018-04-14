@@ -9,6 +9,7 @@
         "class-methods-use-this": "off",
         "comma-dangle": "off",
         "no-new": "warn",
-        "ocnsistent-return": "off"
+        "consistent-return": "off",
+        "arrow-body-style": "warn"
     }
 }
