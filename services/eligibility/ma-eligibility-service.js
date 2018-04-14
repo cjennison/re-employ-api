@@ -17,9 +17,7 @@ class MAEligibilityService {
   }
 
   groupByDate(records) {
-    return _.groupBy(records, (record) => {
-      return moment(record.createdAt).format('L');
-    });
+    return _.groupBy(records, record => moment(record.createdAt).format('L'));
   }
 
   testEligibility(groupedRecords) {

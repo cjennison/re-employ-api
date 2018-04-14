@@ -1,5 +1,6 @@
 const models = require('../db/models');
 const _ = require('lodash');
+const BaseError = require('../services/errors/base-error');
 const { authenticationRequired } = require('../services/auth');
 
 class BaseController {
@@ -9,6 +10,10 @@ class BaseController {
     }
 
     return fields.map(field => models[field]);
+  }
+
+  sendError(res, httpErrorCode, message, errorCode) {
+    res.send(httpErrorCode, new BaseError(message, errorCode).format());
   }
 
   authenticationRequired() {

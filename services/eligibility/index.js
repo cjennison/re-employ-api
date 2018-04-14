@@ -1,4 +1,4 @@
-const MAEligibilityService = require('./MAEligibilityService');
+const MAEligibilityService = require('./ma-eligibility-service');
 
 module.exports = {
   MAEligibilityService

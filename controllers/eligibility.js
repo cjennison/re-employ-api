@@ -1,7 +1,8 @@
-const { User, Location } = require('../db/models');
+const { User, UserLocation, Location } = require('../db/models');
 
+const _ = require('lodash');
 const BaseController = require('./base');
-const EligibilityService = require('../services/eligibility/EligibilityService');
+const EligibilityService = require('../services/eligibility/eligibility-service');
 
 class EligibilityController extends BaseController {
   constructor(app) {
@@ -15,13 +16,23 @@ class EligibilityController extends BaseController {
   getUserEligibility(req, res) {
     console.log('GET /users/:id/eligibility');
     User.findById(req.params.id, {
-      include: [Location]
+      include: [{
+        model: UserLocation,
+        include: [Location]
+      }]
     }).then((user) => {
       if (!user) {
         res.sendStatus(404);
       } else {
-        //  TODO use primary location
-        const eligibilityService = new EligibilityService(user, user.Locations[0]);
+        const primaryUserLocation = _.find(user.UserLocations, (userLocation) => {
+          return userLocation.primary;
+        });
+
+        if (!primaryUserLocation) {
+          return this.sendError(res, 400, 'No Primary Location Set', 'user-location-1');
+        }
+
+        const eligibilityService = new EligibilityService(user, primaryUserLocation.Location);
         eligibilityService.getEligibility().then((eligibility) => {
           res.json(eligibility);
         }).catch((error) => {
