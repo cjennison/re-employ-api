@@ -37,14 +37,14 @@ module.exports = {
       jobId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'jobs',
+          model: 'Jobs',
           key: 'id'
         }
       },
       locationId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'locations',
+          model: 'Locations',
           key: 'id'
         }
       },
