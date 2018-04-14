@@ -27,6 +27,7 @@
     "mysql2": "^1.5.2",
     "nodemailer": "^4.6.3",
     "npm": "^5.7.1",
+    "pg": "^7.4.1",
     "request": "^2.83.0",
     "restify": "^6.3.4",
     "restify-oauth2": "^4.0.4",
