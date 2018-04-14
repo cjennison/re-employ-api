@@ -1,12 +1,12 @@
 //  https://developer.usajobs.gov/Tutorials/Search-Jobs
+require('dotenv').load();
 
 const _ = require('lodash');
 const request = require('request');
-const APIKeys = require('../../../config/api.json');
 
 const host = 'data.usajobs.gov';
-const userAgent = APIKeys.USAJobs.email;
-const authKey = APIKeys.USAJobs.key;
+const userAgent = process.env.USA_JOBS_EMAIL;
+const authKey = process.env.USA_JOBS_TOKEN;
 
 const whoMayApply = 'public';
 

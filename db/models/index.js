@@ -13,6 +13,8 @@ const DATABASE_URL = process.env.DATABASE_URL || process.env.HEROKU_POSTGRESQL_R
 
 let sequelize;
 
+console.log('Connecting to', DATABASE_URL);
+
 if (DATABASE_URL) {
   sequelize = new Sequelize(DATABASE_URL, {});
 } else {
