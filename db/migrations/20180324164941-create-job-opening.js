@@ -34,14 +34,14 @@ module.exports = {
       hash: {
         type: Sequelize.STRING
       },
-      jobId: {
+      JobId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Jobs',
           key: 'id'
         }
       },
-      locationId: {
+      LocationId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Locations',

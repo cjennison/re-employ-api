@@ -7,14 +7,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId: {
+      UserId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Users',
           key: 'id'
         }
       },
-      jobId: {
+      JobId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Jobs',

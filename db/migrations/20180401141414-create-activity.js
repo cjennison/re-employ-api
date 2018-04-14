@@ -7,7 +7,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      jobApplicationRecordId: {
+      JobApplicationRecordId: {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
@@ -15,7 +15,7 @@ module.exports = {
           key: 'id'
         }
       },
-      userId: {
+      UserId: {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
