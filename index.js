@@ -6,8 +6,9 @@ const controllers = require('./controllers/index');
 const queue = require('./jobs/queue');
 const jobs = require('./jobs/index');
 const kue = require('kue');
-
 const Scheduler = require('./jobs/scheduler');
+
+const PORT = process.env.PORT || 3000
 
 const app = express();
 app.use(bodyParser.json()); // for parsing application/json
@@ -18,7 +19,7 @@ app.use('/status', (req, res) => res.send(200));
 app.use(cors());
 controllers(app);
 
-const server = app.listen(3000, () => console.log('Started on port 3000!'));
+const server = app.listen(PORT, () => console.log('Started on port 3000!'));
 
 db.sequelize
   .authenticate()
