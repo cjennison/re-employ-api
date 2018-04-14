@@ -11,7 +11,7 @@ const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const db = {};
 
-const DATABASE_URL = process.env.DATABASE_URL;
+const DATABASE_URL = process.env.DATABASE_URL || process.env.HEROKU_POSTGRESQL_RED_URL;
 
 let sequelize;
 
