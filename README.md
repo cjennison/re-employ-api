@@ -4,13 +4,12 @@
 2. Install Redis (`brew install redis` or http://redis.io/download)
 3. Create a database for the application (ie. `re-employ_db`)
 4. Run `npm install`
-5. Run `cp config/database-default.json config/database.json` and fill out 
-6. Run `cp config/api-default.json config/api.json` and fill out. See APIs for key requests.
-7. Run `cp config/okta-default.json config/okta.json` and fill out. See Auth.
-8. Run `cp .env-default .env` and fill out gmail application credentials
+5. Add your database url to your environment variable  
+`export DATABASE_URL=mysql://root:password@127.0.0.1:3306/re-employ_db`
+6. Run `cp .env-default .env` and fill out gmail application credentials and 
 database credentials.
-9. Run `node_modules/.bin/sequelize db:migrate`
-10. Run `npm start` to start the web server.
+7. Run `node_modules/.bin/sequelize db:migrate`
+8. Run `npm start` to start the web server.
 
 # Redis
 Run `redis-server` in another tab.
@@ -21,7 +20,7 @@ Run `redis-server` in another tab.
 Get a key at https://developer.usajobs.gov/APIRequest/Index
 # Auth
 For Auth we are using OKTA. Sign up at https://www.okta.com/.
-In the developer dashboard select API and create a new token. Use this token in the `okta.json`.
+In the developer dashboard select API and create a new token. Use this token in the `.env`.
 
 # Developer Help
 **I'm bad at CRON what do I do?**  
