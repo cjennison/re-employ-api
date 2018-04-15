@@ -16,6 +16,9 @@ class OpenPositionSearchJob {
         include: [Location]
       }]
     }).then((job) => {
+      if (!job) {
+        return this.done();
+      }
       const searcher = new JobSearcher(job);
       searcher.execute().then((errors) => {
         if (errors && errors.length) {
