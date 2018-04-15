@@ -1,7 +1,9 @@
+require('dotenv').load();
+
 const OktaJwtVerifier = require('@okta/jwt-verifier');
 
 const oktaJwtVerifier = new OktaJwtVerifier({
-  issuer: 'https://dev-535949.oktapreview.com/oauth2/default',
+  issuer: `https://dev-${process.env.OKTA_ID}.oktapreview.com/oauth2/default`,
   assertClaims: {
     aud: 'api://default',
   },

@@ -123,7 +123,7 @@ class UsersController extends BaseController {
     request(
       {
         method: 'POST',
-        url: 'https://dev-535949.oktapreview.com/api/v1/users?activate=true',
+        url: `https://dev-${process.env.OKTA_ID}.oktapreview.com/api/v1/users?activate=true`,
         headers: {
           Authorization: `SSWS ${process.env.OKTA_TOKEN}`
         },
