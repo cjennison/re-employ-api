@@ -53,6 +53,9 @@ class UsersController extends BaseController {
       },
       include: this.modelFields(req.query.fields)
     }).then((user) => {
+      if (!user) {
+        return res.send(404, "User not found");
+      }
       if (this.userMatchesClaimId(req, user.uid)) {
         res.json(user);
       } else {
