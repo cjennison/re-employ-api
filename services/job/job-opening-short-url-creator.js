@@ -25,7 +25,6 @@ class JobOpeningShortUrlCreator {
           if (!url) {
             JobOpeningShortUrl.create({
               jobOpeningId: jobOpening.id,
-              userId: this.user.id,
               hash: JobOpeningShortUrl.generateHash(this.user.id, jobOpening.id, jobOpening.locationId)
             }).then((shortUrl) => {
               console.log('Successfull Created');

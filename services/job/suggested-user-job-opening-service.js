@@ -33,7 +33,7 @@ class SuggestedUserJobOpeningService {
           model: JobOpeningOptOut,
           duplicating: false,
           where: {
-            userId: this.user.id
+            UserId: this.user.id
           },
           required: false
         }

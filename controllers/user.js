@@ -103,8 +103,8 @@ class UsersController extends BaseController {
     this.userHasRole(req.jwt, 'admin').then(() => {
       UserRole.destroy({
         where: {
-          roleId: req.params.id,
-          userId: req.params.userId
+          RoleId: req.params.id,
+          UserId: req.params.userId
         }
       }).then(() => {
         res.sendStatus(200);

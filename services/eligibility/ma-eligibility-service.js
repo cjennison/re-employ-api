@@ -40,7 +40,7 @@ class MAEligibilityService {
   async getEligibility() {
     const records = await JobApplicationRecord.findAll({
       where: {
-        userId: this.user.id,
+        UserId: this.user.id,
         createdAt: {
           [Op.lt]: this.periodEnd,
           [Op.gt]: this.periodStart

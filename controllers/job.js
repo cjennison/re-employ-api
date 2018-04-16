@@ -122,8 +122,8 @@ class JobsController extends BaseController {
       }).then((user) => {
         UserJob.destroy({
           where: {
-            userId: user.id,
-            jobId: job.id
+            UserId: user.id,
+            JobId: job.id
           }
         }).then(() => {
           res.send(200);

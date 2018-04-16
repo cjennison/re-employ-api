@@ -1,11 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const UserRole = sequelize.define('UserRole', {
-    userId: {
-      type: DataTypes.INTEGER
-    },
-    roleId: {
-      type: DataTypes.INTEGER
-    }
+
   }, {
     indexes: [
       {
