@@ -6,6 +6,8 @@ const request = require('request');
 const UserCreator = require('../services/user/user-creator');
 const BaseController = require('./base');
 
+console.log(process.env)
+
 class UsersController extends BaseController {
   constructor(app) {
     super(app);
@@ -143,8 +145,8 @@ class UsersController extends BaseController {
         json: true,
       },
       (error, response, body) => {
-        if (error || body.errorCauses) {
-          console.log(error);
+        if (error || (body.errorCauses && body.errorCauses.length)) {
+          console.log(error, body.errorCauses);
           res.sendStatus(400);
         } else {
           const creator = new UserCreator();
