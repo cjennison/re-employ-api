@@ -1,18 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
-  const UserJob = sequelize.define('UserJob', {
-    userId: {
-      type: DataTypes.INTEGER,
-      unique: 'userIdjobIdIndex'
-    },
-    jobId: {
-      type: DataTypes.INTEGER,
-      unique: 'userIdjobIdIndex'
-    }
-  }, {
+  const UserJob = sequelize.define('UserJob', {}, {
     indexes: [
       {
         unique: true,
-        fields: ['userId', 'jobId']
+        fields: ['UserId', 'JobId']
       }
     ]
   });
