@@ -3,6 +3,7 @@ const Job = require('./job');
 const Apply = require('./apply');
 const Activity = require('./activity');
 const Eligibility = require('./eligibility');
+const JobOpening = require('./job-opening');
 
 module.exports = (app) => {
   new User(app);
@@ -10,4 +11,5 @@ module.exports = (app) => {
   new Apply(app);
   new Activity(app);
   new Eligibility(app);
+  new JobOpening(app);
 };
