@@ -7,7 +7,7 @@ class JobOpeningController extends BaseController {
   constructor(app) {
     super(app);
 
-    app.get('/users/:id/job_openings', (...args) => {
+    app.get('/users/:id/job_openings', this.authenticationRequired(), (...args) => {
       this.getUserJobOpenings(...args);
     });
   }
