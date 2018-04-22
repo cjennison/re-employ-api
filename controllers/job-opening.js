@@ -1,4 +1,4 @@
-const { User, Job, Location, JobOpening } = require('../db/models');
+const { User, Job, Location, JobOpening, JobOpeningShortUrl } = require('../db/models');
 
 const _ = require('lodash');
 const BaseController = require('./base');
@@ -30,7 +30,15 @@ class JobOpeningController extends BaseController {
         where: {
           JobId: jobIds,
           LocationId: locationIds
-        }
+        },
+        include: [
+          {
+            model: JobOpeningShortUrl,
+            where: {
+              UserId: user.id
+            }
+          }
+        ]
       }).then((jobOpenings) => {
         res.send(jobOpenings);
       }).catch(err => this.sendError(res, 500, err));
