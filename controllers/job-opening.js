@@ -21,6 +21,8 @@ class JobOpeningController extends BaseController {
         return res.sendStatus(404);
       }
 
+      if (!this.ensureUserPermission(res, req, user.uid)) return;
+      
       const jobIds = user.Jobs.map(job => job.id);
       const locationIds = user.Locations.map(location => location.id);
 

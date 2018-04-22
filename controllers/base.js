@@ -39,8 +39,17 @@ class BaseController {
     });
   }
 
+  ensureUserPermission(res, req, claimId) {
+    if (!this.userMatchesClaimId(req, claimId)) {
+      res.send(403);
+      return false;
+    }
+
+    return true;
+  }
+
   userMatchesClaimId(req, claimId) {
-    return req.jwt.claims.uid === claimId;
+    return req.jwt && req.jwt.claims.uid === claimId;
   }
 }
 
